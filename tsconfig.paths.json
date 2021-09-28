@@ -9,8 +9,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@utils/*": ["./src/utils/*"],
       "@redux/*": ["./src/redux/*"],
+      "@api/*": ["./src/api/*"],
       "@config": ["./src/config"],
-      "@api": ["./src/api"],
       "~/*": ["./src/*"]
     }
   }
