@@ -1,16 +1,26 @@
 import { useCallback } from 'react';
 
 import AppService from '@api/services/AppService';
-import { selectActor, setActor, setError, setSearching } from '@redux/actor';
+import {
+  selectActor,
+  setActorAndMovies,
+  setError,
+  setSearching,
+} from '@redux/actor';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 
 export default function useApp() {
-  const { actor, searching, error } = useAppSelector(selectActor);
+  const { actor, searching, error, movies } = useAppSelector(selectActor);
   const dispatch = useAppDispatch();
 
   const search = useCallback(
     async (fileOrQuery: Blob | string) => {
-      dispatch(setActor(null));
+      dispatch(
+        setActorAndMovies({
+          actor: null,
+          movies: null,
+        }),
+      );
       dispatch(setSearching(true));
 
       let found = null;
@@ -18,7 +28,7 @@ export default function useApp() {
         found = await AppService.search(fileOrQuery);
         if (!found) throw new Error('Actor not found');
 
-        dispatch(setActor(found));
+        dispatch(setActorAndMovies(found));
       } catch (e) {
         if (e instanceof Error)
           dispatch(
@@ -37,7 +47,7 @@ export default function useApp() {
       dispatch(setError(null));
       dispatch(setSearching(false));
 
-      return found;
+      return found?.actor;
     },
     [dispatch],
   );
@@ -47,5 +57,6 @@ export default function useApp() {
     search,
     error,
     actor,
+    movies,
   };
 }

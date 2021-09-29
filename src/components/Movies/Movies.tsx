@@ -15,25 +15,29 @@ type MovieType = Partial<{
 }>;
 
 export interface MoviesProps {
-  movies?: MovieType[];
+  movies?: Record<string | number, MovieType>;
   getPosterUrl: (movie: MovieType) => string;
 }
 
 const Movies: React.FC<MoviesProps> = ({
-  movies = [],
+  movies = {},
   getPosterUrl,
 }: MoviesProps) => {
+  const length = Object.keys(movies).length;
+
   return (
     <div className={styles.root}>
-      {movies.map((movie, i) => {
+      {Object.keys(movies).map((key, i) => {
+        const movie = movies[key];
+
         return (
           <Movie
-            key={i}
+            key={key}
             name={movie.title || movie.original_title || movie.original_name}
             description={movie.overview}
             releaseDate={movie.release_date}
             voteAverage={movie.vote_average}
-            withDivider={movies.length - 1 !== i}
+            withDivider={length - 1 !== i}
             getPosterUrl={() => getPosterUrl(movie)}
           />
         );

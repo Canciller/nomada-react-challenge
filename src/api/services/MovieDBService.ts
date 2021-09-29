@@ -1,23 +1,40 @@
+import { normalize } from 'normalizr';
+
 import { movieDB } from '@config';
 
-export type ActorType = Partial<{
+import ActorSchema from '../schemas/ActorSchema';
+
+export type Actor = Partial<{
   adult: boolean;
   gender: number;
-  id: number;
-  known_for: Partial<{
-    title: string;
-    overview: string;
-    poster_path: string;
-    vote_average: number;
-    release_date: string;
-    original_name: string;
-    original_title: string;
-  }>[];
-  known_for_department: string;
+  id: string | number;
   name: string;
   popularity: number;
   profile_path: string;
 }>;
+
+export type Movie = Partial<{
+  id: string | number;
+  title: string;
+  overview: string;
+  poster_path: string;
+  vote_average: number;
+  release_date: string;
+  original_name: string;
+  original_title: string;
+}>;
+
+export interface ActorsNormalizerResult {
+  result: string | number;
+  entities: {
+    actors: {
+      [key: string]: Actor;
+    };
+    movies: {
+      [key: string]: Movie;
+    };
+  };
+}
 
 class MovieDBService {
   key: string;
@@ -28,7 +45,7 @@ class MovieDBService {
     this.key = movieDB.key;
   }
 
-  async searchPerson(query: string): Promise<ActorType | null> {
+  async searchPerson(query: string) {
     const res = await fetch(
       `${this.url}/search/person?api_key=${this.key}&query=${query}&language=es`,
     );
@@ -37,7 +54,20 @@ class MovieDBService {
 
     if (!res.ok) throw new Error(data.status_message || res.statusText);
 
-    return data.results.length > 0 ? data.results[0] : null;
+    if (data.results.length === 0) return null;
+
+    const normalized: ActorsNormalizerResult = normalize(
+      data.results[0],
+      ActorSchema,
+    );
+
+    const id = normalized.result;
+    const actor = normalized.entities.actors[id];
+
+    return {
+      actor,
+      movies: normalized.entities.movies,
+    };
   }
 }
 

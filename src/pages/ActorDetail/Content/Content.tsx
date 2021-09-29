@@ -16,7 +16,7 @@ export interface ContentProps {
 }
 
 const Content: React.FC<ContentProps> = ({ paddingLeft = 0 }: ContentProps) => {
-  const { actor } = useApp();
+  const { movies } = useApp();
 
   return (
     <div
@@ -36,7 +36,7 @@ const Content: React.FC<ContentProps> = ({ paddingLeft = 0 }: ContentProps) => {
       </Title>
       <Divider />
       <Movies
-        movies={actor?.known_for}
+        movies={movies}
         getPosterUrl={movie => {
           return getMovieDBPictureURL(movie.poster_path);
         }}

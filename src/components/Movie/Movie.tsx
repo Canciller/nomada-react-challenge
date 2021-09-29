@@ -83,7 +83,7 @@ const Movie: React.FC<MovieProps> = ({
             </Title>
             <Paragraph
               style={{
-                fontSize: '1.2em',
+                fontSize: '1.5em',
                 margin: 0,
               }}
             >

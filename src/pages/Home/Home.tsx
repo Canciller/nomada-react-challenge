@@ -16,8 +16,8 @@ const Home: React.FC = () => {
   const { fileList, file, preview, handleChange } = useUploader();
 
   const handleSearch = () => {
-    search(file?.originFileObj as Blob).then(found => {
-      if (found) history.push(`/detail?name=${found.name}`);
+    search(file?.originFileObj as Blob).then(actor => {
+      if (actor) history.push(`/detail?name=${actor.name}`);
     });
   };
 
