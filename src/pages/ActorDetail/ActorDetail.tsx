@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 
+import { MehOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
+
 import Actor from '@components/Actor';
 import Movies from '@components/Movies';
 import useApp from '@hooks/useApp';
@@ -14,7 +17,7 @@ import styles from './ActorDetail.module.scss';
 const ActorDetail: React.FC = () => {
   const query = useQuery();
 
-  const { actor, searching, search } = useApp();
+  const { actor, searching, search, error } = useApp();
 
   useEffect(() => {
     const name = query.get('name');
@@ -22,12 +25,63 @@ const ActorDetail: React.FC = () => {
     if (!name) return;
 
     search(name);
-  }, [actor, query, search]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const picture = getMovieDBPictureURL(actor?.profile_path);
 
-  if (!searching) return <div>Buscando...</div>;
-  if (!actor) return <div>Actor no encontrado</div>;
+  if (searching)
+    return (
+      <div
+        className={styles.root}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          padding: '1em',
+        }}
+      >
+        <Spin size="large" />
+        <p
+          style={{
+            marginTop: '1em',
+            fontSize: '1.5em',
+          }}
+        >
+          Cargando
+        </p>
+      </div>
+    );
+
+  if (!actor)
+    return (
+      <div
+        className={styles.root}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          padding: '1em',
+        }}
+      >
+        <MehOutlined
+          style={{
+            fontSize: '6em',
+          }}
+        />
+        <p
+          style={{
+            marginTop: '1em',
+            fontSize: '1.5em',
+          }}
+        >
+          {error ? error.message : 'Actor no encontrado'}
+        </p>
+        <Toolbar />
+      </div>
+    );
 
   return (
     <div className={styles.root}>
