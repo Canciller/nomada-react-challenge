@@ -1,0 +1,50 @@
+.root {
+  position: relative;
+  overflow: auto;
+  flex: 1;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+// Movie
+.movie {
+  background: white;
+  display: flex;
+  margin-bottom: 1em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.description {
+  padding: 1em;
+}
+
+.poster {
+  width: 20em;
+  background: black;
+}
+
+.name {
+  font-weight: bold;
+}

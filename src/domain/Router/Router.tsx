@@ -2,18 +2,18 @@ import React from 'react';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+import ActorDetail from '@pages/ActorDetail';
 import Home from '@pages/Home';
-import NotFound from '@pages/NotFound';
 
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <Home />
+        <Route path="/detail">
+          <ActorDetail />
         </Route>
-        <Route path="*">
-          <NotFound />
+        <Route path="/">
+          <Home />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  margin-bottom: 1em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.description {
+  padding: 1em;
+}
+
+.name {
+  font-weight: bold;
+}
