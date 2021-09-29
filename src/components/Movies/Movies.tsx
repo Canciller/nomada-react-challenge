@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Divider } from 'antd';
-
 import Movie from '@components/Movie';
 
 import styles from './Movies.module.scss';
@@ -12,6 +10,8 @@ type MovieType = Partial<{
   poster_path: string;
   release_date: string;
   vote_average: number;
+  original_name: string;
+  original_title: string;
 }>;
 
 export interface MoviesProps {
@@ -27,17 +27,15 @@ const Movies: React.FC<MoviesProps> = ({
     <div className={styles.root}>
       {movies.map((movie, i) => {
         return (
-          <>
-            <Movie
-              key={i}
-              name={`${movie.title}`}
-              description={movie.overview}
-              releaseDate={movie.release_date}
-              voteAverage={movie.vote_average}
-              getPosterUrl={() => getPosterUrl(movie)}
-            />
-            {movies.length - 1 != i && <Divider />}
-          </>
+          <Movie
+            key={i}
+            name={movie.title || movie.original_title || movie.original_name}
+            description={movie.overview}
+            releaseDate={movie.release_date}
+            voteAverage={movie.vote_average}
+            withDivider={movies.length - 1 !== i}
+            getPosterUrl={() => getPosterUrl(movie)}
+          />
         );
       })}
     </div>

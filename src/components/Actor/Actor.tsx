@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { ManOutlined, WomanOutlined, LikeFilled } from '@ant-design/icons';
+import {
+  ManOutlined,
+  WomanOutlined,
+  LikeFilled,
+  SmileFilled,
+} from '@ant-design/icons';
 import { Typography } from 'antd';
 
 const { Title } = Typography;
@@ -27,13 +32,23 @@ const Actor: React.FC<ActorProps> = ({
     <div>
       <Title style={style}>{name}</Title>
       <Title level={3} style={style}>
-        {gender === 2 ? <ManOutlined /> : <WomanOutlined />}
+        {gender === 2 ? (
+          <ManOutlined />
+        ) : gender === 1 ? (
+          <WomanOutlined />
+        ) : (
+          <SmileFilled />
+        )}
         <span
           style={{
             marginLeft: '0.5em',
           }}
         >
-          {gender === 2 ? 'Hombre' : 'Mujer'}
+          {gender === 2
+            ? 'Hombre'
+            : gender === 1
+            ? 'Mujer'
+            : 'Genero indefinido'}
         </span>
       </Title>
       <Title level={3} style={style}>

@@ -10,6 +10,8 @@ export type ActorType = Partial<{
     poster_path: string;
     vote_average: number;
     release_date: string;
+    original_name: string;
+    original_title: string;
   }>[];
   known_for_department: string;
   name: string;
