@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { MehOutlined } from '@ant-design/icons';
-import { Spin } from 'antd';
+import { Layout, Spin } from 'antd';
 
 import Actor from '@components/Actor';
 import Movies from '@components/Movies';
@@ -13,6 +13,8 @@ import Picture from './Picture';
 import Toolbar from './Toolbar';
 
 import styles from './ActorDetail.module.scss';
+
+const { Content } = Layout;
 
 const ActorDetail: React.FC = () => {
   const query = useQuery();
@@ -84,8 +86,8 @@ const ActorDetail: React.FC = () => {
     );
 
   return (
-    <div className={styles.root}>
-      <div className={styles.container}>
+    <Layout className={styles.root}>
+      <Content className={styles.container}>
         <Toolbar />
         <div className={styles.content}>
           <section>
@@ -112,8 +114,8 @@ const ActorDetail: React.FC = () => {
             />
           </section>
         </div>
-      </div>
-    </div>
+      </Content>
+    </Layout>
   );
 };
 

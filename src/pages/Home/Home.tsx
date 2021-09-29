@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Button, Layout } from 'antd';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { useHistory } from 'react-router';
 
@@ -10,6 +10,8 @@ import useApp from '@hooks/useApp';
 import getBase64 from '@utils/getBase64';
 
 import styles from './Home.module.scss';
+
+const { Content } = Layout;
 
 const Home: React.FC = () => {
   const history = useHistory();
@@ -57,7 +59,7 @@ const Home: React.FC = () => {
   }, [file]);
 
   return (
-    <div className={styles.root}>
+    <Layout className={styles.root}>
       <div className={styles.container}>
         <h1 className={styles.title}>¿Quién es ese actor?</h1>
         <Uploader
@@ -100,7 +102,7 @@ const Home: React.FC = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
