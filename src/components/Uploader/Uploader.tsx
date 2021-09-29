@@ -4,7 +4,6 @@ import { InboxOutlined } from '@ant-design/icons';
 import { Upload } from 'antd';
 import { DraggerProps } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
-import classNames from 'classnames';
 
 import styles from './Uploader.module.scss';
 
@@ -21,11 +20,10 @@ export interface UploaderProps extends DraggerProps {
 const Uploader: React.FC<UploaderProps> = ({
   showPreview = false,
   renderPreview,
-  className,
   ...props
 }: UploaderProps) => {
   return (
-    <Dragger className={classNames(styles.root, className)} {...props}>
+    <Dragger {...props}>
       {showPreview && renderPreview ? (
         <div className={styles.preview}>{renderPreview()}</div>
       ) : (

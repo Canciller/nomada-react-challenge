@@ -4,10 +4,6 @@ import AppService from '@api/services/AppService';
 import { selectActor, setActor, setError, setSearching } from '@redux/actor';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 
-function timeout(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 const useApp = () => {
   const { actor, searching, error } = useAppSelector(selectActor);
   const dispatch = useAppDispatch();
@@ -34,12 +30,6 @@ const useApp = () => {
     },
     [dispatch],
   );
-
-  const fakeSearch = useCallback(async (ms: number) => {
-    setSearching(true);
-    await timeout(ms);
-    setSearching(false);
-  }, []);
 
   return {
     searching,

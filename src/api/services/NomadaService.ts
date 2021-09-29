@@ -1,9 +1,3 @@
-/*
-function timeout(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-*/
-
 class NomadaService {
   key: string;
   url: string;
