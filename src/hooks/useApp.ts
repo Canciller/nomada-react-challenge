@@ -4,7 +4,7 @@ import AppService from '@api/services/AppService';
 import { selectActor, setActor, setError, setSearching } from '@redux/actor';
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 
-const useApp = () => {
+export default function useApp() {
   const { actor, searching, error } = useAppSelector(selectActor);
   const dispatch = useAppDispatch();
 
@@ -37,6 +37,4 @@ const useApp = () => {
     error,
     actor,
   };
-};
-
-export default useApp;
+}
