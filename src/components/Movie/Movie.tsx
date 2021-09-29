@@ -50,6 +50,7 @@ const Movie: React.FC<MovieProps> = ({
         level={3}
         style={{
           marginTop: 0,
+          marginBottom: '0.8em',
           fontWeight: 'normal',
         }}
       >
