@@ -26,7 +26,7 @@ const ActorDetail: React.FC = () => {
 
   const picture = getMovieDBPictureURL(actor?.profile_path);
 
-  if (searching) return <div>Buscando...</div>;
+  if (!searching) return <div>Buscando...</div>;
   if (!actor) return <div>Actor no encontrado</div>;
 
   return (
