@@ -7,7 +7,9 @@ import type { RootState } from './store';
 export interface ActorState {
   searching: boolean;
   actor: ActorType | null;
-  error: Error | null;
+  error: {
+    message: string;
+  } | null;
 }
 
 const initialState: ActorState = {

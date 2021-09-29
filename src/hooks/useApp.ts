@@ -20,7 +20,18 @@ export default function useApp() {
 
         dispatch(setActor(found));
       } catch (e) {
-        dispatch(setError(e as Error));
+        if (e instanceof Error)
+          dispatch(
+            setError({
+              message: e.message,
+            }),
+          );
+        else
+          dispatch(
+            setError({
+              message: 'Ha ocurrido un error',
+            }),
+          );
       }
 
       dispatch(setError(null));

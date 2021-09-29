@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Button, Layout } from 'antd';
+import { Button, Layout, message } from 'antd';
 import { useHistory } from 'react-router';
 
 import Uploader from '@components/Uploader';
@@ -12,7 +12,7 @@ import styles from './Home.module.scss';
 
 const Home: React.FC = () => {
   const history = useHistory();
-  const { searching, search } = useApp();
+  const { searching, search, error } = useApp();
   const { fileList, file, preview, handleChange } = useUploader();
 
   const handleSearch = () => {
@@ -21,15 +21,16 @@ const Home: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    if (error) message.error(error.message);
+  }, [error]);
+
   return (
     <Layout className={styles.root}>
       <div className={styles.container}>
         <h1 className={styles.title}>¿Quién es ese actor?</h1>
         <Uploader
           onChange={handleChange}
-          onDrop={e => {
-            console.log(e);
-          }}
           fileList={fileList}
           accept="image/png, image/jpeg"
           showUploadList={false}
