@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { MehOutlined } from '@ant-design/icons';
-import { Layout, Spin } from 'antd';
+import { Layout, Spin, Typography } from 'antd';
 
 import Actor from '@components/Actor';
 import Movies from '@components/Movies';
@@ -14,7 +14,12 @@ import Toolbar from './Toolbar';
 
 import styles from './ActorDetail.module.scss';
 
-const { Content } = Layout;
+const { Content, Header } = Layout;
+const { Paragraph } = Typography;
+
+const IMAGE_WIDTH = '30em';
+const IMAGE_PADDING = '4em';
+const LEFT_PADDING = `calc(${IMAGE_WIDTH} + ${IMAGE_PADDING})`;
 
 const ActorDetail: React.FC = () => {
   const query = useQuery();
@@ -87,34 +92,59 @@ const ActorDetail: React.FC = () => {
 
   return (
     <Layout className={styles.root}>
-      <Content className={styles.container}>
+      <div className={styles.container}>
         <Toolbar />
-        <div className={styles.content}>
-          <section>
-            <Picture src={picture} />
-            <Actor
-              name={actor.name}
-              gender={actor.gender}
-              popularity={actor.popularity}
-            />
-          </section>
-          <section className={styles.right}>
-            <h2
-              style={{
-                fontWeight: 'bold',
-              }}
-            >
-              Peliculas
-            </h2>
-            <Movies
-              movies={actor.known_for}
-              getPosterUrl={movie => {
-                return getMovieDBPictureURL(movie.poster_path);
-              }}
-            />
-          </section>
+        <Header
+          style={{
+            alignItems: 'center',
+            display: 'flex',
+            height: 'auto',
+            padding: '1em 2em',
+            paddingLeft: LEFT_PADDING,
+            marginTop: '10em',
+            position: 'relative',
+          }}
+        >
+          <Actor
+            name={actor.name}
+            gender={actor.gender}
+            popularity={actor.popularity}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              left: '2em',
+              top: '-10em',
+              width: '30em',
+              background: 'red',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <Picture width={IMAGE_WIDTH} src={picture} />
+          </div>
+        </Header>
+        <div
+          className={styles.content}
+          style={{
+            paddingLeft: LEFT_PADDING,
+          }}
+        >
+          <h2
+            style={{
+              fontWeight: 'bold',
+            }}
+          >
+            Peliculas
+          </h2>
+          <Movies
+            movies={actor.known_for}
+            getPosterUrl={movie => {
+              return getMovieDBPictureURL(movie.poster_path);
+            }}
+          />
         </div>
-      </Content>
+      </div>
     </Layout>
   );
 };

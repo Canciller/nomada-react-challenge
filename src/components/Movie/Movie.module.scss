@@ -1,14 +1,12 @@
 .root {
+  display: flex;
+  align-items: flex-start;
+
   margin-bottom: 1em;
 
   &:last-child {
     margin-bottom: 0;
   }
-}
-
-.content {
-  display: flex;
-  align-items: flex-start;
 }
 
 .description {

@@ -1,6 +1,10 @@
 import React from 'react';
 
+import { Layout, Spin, Typography } from 'antd';
+
 import styles from './Actor.module.scss';
+
+const { Title, Paragraph } = Typography;
 
 export interface ActorProps {
   children?: React.ReactNode;
@@ -15,16 +19,10 @@ const Actor: React.FC<ActorProps> = ({
   popularity,
 }: ActorProps) => {
   return (
-    <div className={styles.root}>
-      <h1
-        style={{
-          fontWeight: 'bold',
-        }}
-      >
-        {name}
-      </h1>
-      <p className={styles.gender}>{gender === 2 ? 'Hombre' : 'Mujer'}</p>
-      <p className={styles.popularity}>{`Popularidad: ${popularity}`}</p>
+    <div>
+      <h1 className={styles.text}>{name}</h1>
+      <h2 className={styles.text}>{gender === 2 ? 'Hombre' : 'Mujer'}</h2>
+      <h2 className={styles.text}>{`Popularidad: ${popularity}`}</h2>
     </div>
   );
 };
