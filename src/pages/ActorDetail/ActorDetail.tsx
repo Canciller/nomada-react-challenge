@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { MehOutlined } from '@ant-design/icons';
+import { MehOutlined, NotificationFilled } from '@ant-design/icons';
 import { Layout, Spin, Typography } from 'antd';
 
 import Actor from '@components/Actor';
@@ -14,8 +14,7 @@ import Toolbar from './Toolbar';
 
 import styles from './ActorDetail.module.scss';
 
-const { Content, Header } = Layout;
-const { Paragraph } = Typography;
+const { Title } = Typography;
 
 const IMAGE_WIDTH = '30em';
 const IMAGE_PADDING = '4em';
@@ -39,7 +38,7 @@ const ActorDetail: React.FC = () => {
 
   if (searching)
     return (
-      <div
+      <Layout
         className={styles.root}
         style={{
           display: 'flex',
@@ -58,12 +57,12 @@ const ActorDetail: React.FC = () => {
         >
           Cargando
         </p>
-      </div>
+      </Layout>
     );
 
   if (!actor)
     return (
-      <div
+      <Layout
         className={styles.root}
         style={{
           display: 'flex',
@@ -87,22 +86,18 @@ const ActorDetail: React.FC = () => {
           {error ? error.message : 'Actor no encontrado'}
         </p>
         <Toolbar />
-      </div>
+      </Layout>
     );
 
   return (
     <Layout className={styles.root}>
       <div className={styles.container}>
         <Toolbar />
-        <Header
+        <div
+          className={styles.header}
           style={{
-            alignItems: 'center',
-            display: 'flex',
-            height: 'auto',
-            padding: '1em 2em',
             paddingLeft: LEFT_PADDING,
             marginTop: '10em',
-            position: 'relative',
           }}
         >
           <Actor
@@ -116,27 +111,36 @@ const ActorDetail: React.FC = () => {
               left: '2em',
               top: '-10em',
               width: '30em',
-              background: 'red',
               display: 'flex',
               justifyContent: 'center',
+              borderRadius: '0.5em',
+              overflow: 'hidden',
             }}
           >
             <Picture width={IMAGE_WIDTH} src={picture} />
           </div>
-        </Header>
+        </div>
         <div
           className={styles.content}
           style={{
             paddingLeft: LEFT_PADDING,
           }}
         >
-          <h2
+          <Title
             style={{
-              fontWeight: 'bold',
+              fontWeight: 'normal',
+              marginBottom: '0.7em',
             }}
           >
-            Peliculas
-          </h2>
+            <NotificationFilled />
+            <span
+              style={{
+                marginLeft: '0.5em',
+              }}
+            >
+              Peliculas
+            </span>
+          </Title>
           <Movies
             movies={actor.known_for}
             getPosterUrl={movie => {

@@ -11,8 +11,6 @@ import getBase64 from '@utils/getBase64';
 
 import styles from './Home.module.scss';
 
-const { Content } = Layout;
-
 const Home: React.FC = () => {
   const history = useHistory();
   const [fileList, setFileList] = useState<UploaderFileType[]>([]);

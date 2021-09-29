@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { Layout, Spin, Typography } from 'antd';
+import { ManOutlined, WomanOutlined, LikeFilled } from '@ant-design/icons';
+import { Typography } from 'antd';
 
-import styles from './Actor.module.scss';
-
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
 export interface ActorProps {
   children?: React.ReactNode;
@@ -18,11 +17,40 @@ const Actor: React.FC<ActorProps> = ({
   gender,
   popularity,
 }: ActorProps) => {
+  const style: React.CSSProperties = {
+    margin: '0.2em 0',
+    color: 'white',
+    fontWeight: 'normal',
+  };
+
   return (
     <div>
-      <h1 className={styles.text}>{name}</h1>
-      <h2 className={styles.text}>{gender === 2 ? 'Hombre' : 'Mujer'}</h2>
-      <h2 className={styles.text}>{`Popularidad: ${popularity}`}</h2>
+      <Title style={style}>{name}</Title>
+      <Title level={3} style={style}>
+        {gender === 2 ? <ManOutlined /> : <WomanOutlined />}
+        <span
+          style={{
+            marginLeft: '0.5em',
+          }}
+        >
+          {gender === 2 ? 'Hombre' : 'Mujer'}
+        </span>
+      </Title>
+      <Title level={3} style={style}>
+        <LikeFilled
+          style={{
+            fontSize: '0.9em',
+          }}
+        />
+        <span
+          style={{
+            margin: '0 0.5em',
+          }}
+        >
+          Popularidad:
+        </span>
+        <span>{popularity}</span>
+      </Title>
     </div>
   );
 };

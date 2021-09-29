@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Divider } from 'antd';
+
 import Movie from '@components/Movie';
 
 import styles from './Movies.module.scss';
@@ -26,14 +28,17 @@ const Movies: React.FC<MoviesProps> = ({
       <div className={styles.content}>
         {movies.map((movie, i) => {
           return (
-            <Movie
-              key={i}
-              name={`${movie.title}`}
-              description={movie.overview}
-              releaseDate={movie.release_date}
-              voteAverage={movie.vote_average}
-              getPosterUrl={() => getPosterUrl(movie)}
-            />
+            <>
+              <Movie
+                key={i}
+                name={`${movie.title}`}
+                description={movie.overview}
+                releaseDate={movie.release_date}
+                voteAverage={movie.vote_average}
+                getPosterUrl={() => getPosterUrl(movie)}
+              />
+              <Divider />
+            </>
           );
         })}
       </div>
