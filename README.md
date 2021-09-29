@@ -16,7 +16,7 @@ Crear una interfaz hecha con react que conecte varias APIs para lograr saber com
 ### Puntos Extra
 - [x] Guardar el estado de la aplicación en redux.
 - [x] Usar react-router para las dos vistas.
-- [ ] Usar normalizr 
+- [x] Usar normalizr 
 ## Instalación
 Comandos para instalación del proyecto:
 ```bash
