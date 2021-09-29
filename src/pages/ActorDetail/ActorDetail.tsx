@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { MehOutlined, NotificationFilled } from '@ant-design/icons';
-import { Layout, Spin, Typography } from 'antd';
+import { Layout, Spin, Typography, Divider } from 'antd';
 
 import Actor from '@components/Actor';
 import Movies from '@components/Movies';
@@ -129,18 +129,13 @@ const ActorDetail: React.FC = () => {
           <Title
             style={{
               fontWeight: 'normal',
-              marginBottom: '0.7em',
+              marginBottom: 0,
             }}
           >
             <NotificationFilled />
-            <span
-              style={{
-                marginLeft: '0.5em',
-              }}
-            >
-              Peliculas
-            </span>
+            <span>{' Peliculas'}</span>
           </Title>
+          <Divider />
           <Movies
             movies={actor.known_for}
             getPosterUrl={movie => {
