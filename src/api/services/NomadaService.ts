@@ -1,10 +1,12 @@
+import { nomada } from '@config';
+
 class NomadaService {
   key: string;
   url: string;
 
   constructor() {
-    this.url = process.env.REACT_APP_NOMADA_URL as string;
-    this.key = process.env.REACT_APP_NOMADA_KEY as string;
+    this.url = nomada.url;
+    this.key = nomada.key;
   }
 
   async upload(file: Blob): Promise<string> {

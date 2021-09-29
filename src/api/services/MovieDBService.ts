@@ -1,3 +1,5 @@
+import { movieDB } from '@config';
+
 export type ActorType = Partial<{
   adult: boolean;
   gender: number;
@@ -20,8 +22,8 @@ class MovieDBService {
   url: string;
 
   constructor() {
-    this.url = process.env.REACT_APP_MOVIE_DB_URL as string;
-    this.key = process.env.REACT_APP_MOVIE_DB_KEY as string;
+    this.url = movieDB.url;
+    this.key = movieDB.key;
   }
 
   async searchPerson(query: string): Promise<ActorType | null> {
